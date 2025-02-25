@@ -34,5 +34,23 @@ export default function QueryProcessor(query: string): string {
     return (max).toString();
   }
 
+  if (query.toLowerCase().includes("plus")) {
+	const numbers = [];
+	const words = query.split(" ");
+
+	for (const word of words) {
+		const num = Number(word); // Convert the word to a number
+		if (!Number.isNaN(num)) { // Now it's safe to check if it's NaN
+			numbers.push(num);
+		}
+	}
+	let sum = 0;
+	for (let i = 0; i < numbers.length; i++) {
+		sum += numbers[i];
+	}
+	console.log(sum)
+    return (sum).toString();
+  }
+
   return "";
 }
