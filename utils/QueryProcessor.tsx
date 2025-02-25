@@ -35,39 +35,46 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("plus")) {
-	const numbers = [];
-	const words = query.split(" ");
-
-	for (const word of words) {
-		const num = Number(word); // Convert the word to a number
-		if (!Number.isNaN(num)) { // Now it's safe to check if it's NaN
-			numbers.push(num);
+	let matches = query.match(/(\d[\d\.]*)/g);
+	let sum = 0;
+	if (matches!= null){
+		for (let i = 0; i < matches.length; i++) {
+			sum += parseInt(matches[i]);
 		}
 	}
-	let sum = 0;
-	for (let i = 0; i < numbers.length; i++) {
-		sum += numbers[i];
-	}
-	console.log(sum)
     return (sum).toString();
   }
 
   if (query.toLowerCase().includes("multiplied")) {
-	const numbers = [];
-	const words = query.split(" ");
-
-	for (const word of words) {
-		const num = Number(word); // Convert the word to a number
-		if (!Number.isNaN(num)) { // Now it's safe to check if it's NaN
-			numbers.push(num);
-		}
-	}
+	let matches = query.match(/(\d[\d\.]*)/g);
 	let product = 0;
-	for (let i = 0; i < numbers.length; i++) {
-		product *= numbers[i];
+	if (matches!= null){
+		for (let i = 0; i < matches.length; i++) {
+			product *= parseInt(matches[i]);
+		}
 	}
 	console.log(product)
     return (product).toString();
+  }
+
+  if (query.toLowerCase().includes("a square and a cube")) {
+	let afterColon = query.split(":")[1];
+	let nums = afterColon.substring(1, afterColon.length - 1) 
+	let numS = nums.split(",");
+	let numV = [];
+	for (let i = 0; i < nums.length; i++) {
+		let temp = parseInt(numS[i]);
+		numV.push(temp);
+	}	  
+	let result = numV[0];
+	for (let i = 1; i < numV.length; i++) {
+		const sixthRoot = Math.pow(numV[0], 1/6);
+    	if (Number.isInteger(sixthRoot)){
+			result = numV[0];
+		}
+	}
+	console.log(result);
+    return (result).toString();
   }
   
 
