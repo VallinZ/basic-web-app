@@ -16,7 +16,22 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("largest")) {
-    return "48";
+	let afterColon = query.split(":")[1];
+	let nums = afterColon.substring(1, afterColon.length - 1) 
+	let numS = nums.split(",");
+	let numV = [];
+	for (let i = 0; i < nums.length; i++) {
+		let temp = parseInt(numS[i]);
+		numV.push(temp);
+	}	  
+	let max = numV[0];
+	for (let i = 1; i < numV.length; i++) {
+		if (numV[i] > max) {
+			max = numV[i];
+		}
+	}
+	console.log(max);
+    return (max).toString();
   }
 
   return "";
