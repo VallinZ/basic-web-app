@@ -57,6 +57,28 @@ export default function QueryProcessor(query: string): string {
     return (product).toString();
   }
 
+  if (query.toLowerCase().includes("primes")) {
+	let matches = query.match(/(\d[\d\.]*)/g);
+	let result = 0;
+	if (matches!= null){
+		for (let i = 0; i < matches.length; i++) {
+			let number = parseInt(matches[i]);
+			let isPrime = true;
+			for (let j = 2; j <= number/2; j++) {
+				if (number % j == 0) {
+					isPrime = false;
+					break;
+				}
+			}
+			if (isPrime){
+				result = number;
+			}
+		}
+	}
+	console.log(result)
+    return (result).toString();
+  }
+
   if (query.toLowerCase().includes("minus")) {
 	let matches = query.match(/(\d[\d\.]*)/g);
 	let result = 0;
@@ -80,6 +102,8 @@ export default function QueryProcessor(query: string): string {
 	console.log(result)
     return (result).toString();
   }
+
+  
 
   if (query.toLowerCase().includes("a square and a cube")) {
 	let afterColon = query.split(":")[1];
