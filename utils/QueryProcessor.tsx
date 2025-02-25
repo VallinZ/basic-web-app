@@ -47,7 +47,7 @@ export default function QueryProcessor(query: string): string {
 
   if (query.toLowerCase().includes("multiplied")) {
 	let matches = query.match(/(\d[\d\.]*)/g);
-	let product = 0;
+	let product = 1;
 	if (matches!= null){
 		for (let i = 0; i < matches.length; i++) {
 			product *= parseInt(matches[i]);
@@ -55,6 +55,30 @@ export default function QueryProcessor(query: string): string {
 	}
 	console.log(product)
     return (product).toString();
+  }
+
+  if (query.toLowerCase().includes("minus")) {
+	let matches = query.match(/(\d[\d\.]*)/g);
+	let result = 0;
+	if (matches!= null){
+		let value1 = parseInt(matches[0]);
+		let value2 = parseInt(matches[1]);
+		result = value1 - value2;
+	}
+	console.log(result)
+    return (result).toString();
+  }
+
+  if (query.toLowerCase().includes("power")) {
+	let matches = query.match(/(\d[\d\.]*)/g);
+	let result = 0;
+	if (matches!= null){
+		let value1 = parseInt(matches[0]);
+		let value2 = parseInt(matches[1]);
+		result = Math.pow(value1, value2)
+	}
+	console.log(result)
+    return (result).toString();
   }
 
   if (query.toLowerCase().includes("a square and a cube")) {
