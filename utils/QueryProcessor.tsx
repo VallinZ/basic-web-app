@@ -52,5 +52,24 @@ export default function QueryProcessor(query: string): string {
     return (sum).toString();
   }
 
+  if (query.toLowerCase().includes("multiplied")) {
+	const numbers = [];
+	const words = query.split(" ");
+
+	for (const word of words) {
+		const num = Number(word); // Convert the word to a number
+		if (!Number.isNaN(num)) { // Now it's safe to check if it's NaN
+			numbers.push(num);
+		}
+	}
+	let product = 0;
+	for (let i = 0; i < numbers.length; i++) {
+		product *= numbers[i];
+	}
+	console.log(product)
+    return (product).toString();
+  }
+  
+
   return "";
 }
